@@ -1,2 +1,84 @@
 
-<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><title>ابن مصر للشطرنج</title><style>body{background:#1a1a1a;color:#fac815;text-align:center;font-family:Tahoma;margin:0;padding:20px}h1{font-size:36px}#board{width:320px;height:320px;margin:20px auto;border:4px solid #fac815;display:grid;grid-template-columns:repeat(8,1fr)}.sq{width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:26px}.w{background:#f0d9b5;color:#000}.b{background:#b58863;color:#000}</style></head><body><h1>ابن مصر للشطرنج ♟️</h1><div id="board"></div><p>الموقع اشتغل بنجاح!</p><script>const b=document.getElementById('board');let p=['♜','♞','♝','♛','♚','♝','♞','♜'];for(let r=0;r<8;r++){for(let c=0;c<8;c++){let d=document.createElement('div');d.className='sq '+((r+c)%2==0?'w':'b');if(r==0)d.textContent=p[c];if(r==1)d.textContent='♟';if(r==6)d.textContent='♙';if(r==7)d.textContent=p[c];b.appendChild(d)}} </script></body></html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ابن مصر للشطرنج - لعبة كاملة</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#161512;font-family:'Cairo',Tahoma;color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:12px}
+h1{color:#f7c948;font-size:28px;margin:10px 0 6px}
+.sub{color:#aaa;font-size:13px;margin-bottom:12px}
+.wrap{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;max-width:1100px;width:100%}
+.board-box{background:#262421;border-radius:12px;padding:12px}
+#board{width:min(92vw,480px);height:min(92vw,480px);display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(8,1fr);border-radius:8px;overflow:hidden}
+.sq{display:flex;align-items:center;justify-content:center;font-size:min(7vw,38px);cursor:pointer;position:relative}
+.light{background:#f0d9b5}.dark{background:#b58863}
+.sq.selected{box-shadow:inset 0 0 0 4px #f7c948!important}
+.sq.last-from,.sq.last-to{background:#f6f668!important}
+.sq.legal::after{content:'';position:absolute;width:28%;height:28%;background:rgba(0,0,0,.28);border-radius:50%}
+.sq.legal.capture::after{width:86%;height:86%;background:transparent;border:5px solid rgba(0,0,0,.32)}
+.sq.in-check{background:#ff6b6b!important}
+.piece{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.piece.w{color:#fff;text-shadow:0 0 1px #000,0 1px 3px #000}.piece.b{color:#000}
+.panel{width:min(92vw,340px);background:#262421;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.timers{display:flex;gap:8px}.timer{flex:1;background:#3a3937;padding:10px;border-radius:8px;text-align:center;font-weight:800;font-size:20px}.timer.active{background:#f7c948;color:#000}
+.status{padding:10px;background:#3a3937;border-radius:8px;text-align:center;font-weight:700;min-height:44px;display:flex;align-items:center;justify-content:center}
+.status.check{color:#ff6b6b}.status.mate{color:#f7c948;background:#4a3f1a}
+.moves{height:180px;overflow-y:auto;background:#1e1c1a;border-radius:8px;padding:8px;display:flex;flex-wrap:wrap;gap:4px}
+.move{padding:3px 8px;background:#3a3937;border-radius:4px;font-size:13px}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}.btn{padding:10px;border:none;border-radius:8px;font-family:'Cairo';font-weight:700;cursor:pointer}.btn-gold{background:#f7c948;color:#000}.btn-dark{background:#3a3937;color:#fff}
+</style>
+</head>
+<body>
+<h1>♟️ ابن مصر للشطرنج</h1>
+<div class="sub">لعبة كاملة - كش • كش مات • تبييت • ترقية • أكل بالتجاوز</div>
+<div class="wrap">
+<div class="board-box"><div id="board"></div></div>
+<div class="panel">
+<div class="timers"><div id="timer-b" class="timer">10:00</div><div id="timer-w" class="timer active">10:00</div></div>
+<div id="status" class="status">دور الأبيض - اختر قطعة</div>
+<div class="moves" id="moves"></div>
+<div class="btns">
+<button class="btn btn-gold" onclick="newGame()">لعبة جديدة</button>
+<button class="btn btn-dark" onclick="undoMove()">تراجع</button>
+<button class="btn btn-dark" onclick="flipBoard()">قلب الرقعة</button>
+<button class="btn btn-dark" onclick="location.reload()">تحديث</button>
+</div>
+</div>
+</div>
+<script>
+let board,turn='w',castling,enPassant,history=[],flipped=false,selected=null,legalMoves=[],lastMove=null,timers={w:600,b:600},timerInterval=null,gameOver=false;
+const piecesUnicode={w:{p:'♙',n:'♘',b:'♗',r:'♖',q:'♕',k:'♔'},b:{p:'♟',n:'♞',b:'♝',r:'♜',q:'♛',k:'♚'}};
+function initBoard(){board=[[{t:'r',c:'b'},{t:'n',c:'b'},{t:'b',c:'b'},{t:'q',c:'b'},{t:'k',c:'b'},{t:'b',c:'b'},{t:'n',c:'b'},{t:'r',c:'b'}],Array(8).fill(0).map(()=>({t:'p',c:'b'})),Array(8).fill(null),Array(8).fill(null),Array(8).fill(null),Array(8).fill(null),Array(8).fill(0).map(()=>({t:'p',c:'w'})),[{t:'r',c:'w'},{t:'n',c:'w'},{t:'b',c:'w'},{t:'q',c:'w'},{t:'k',c:'w'},{t:'b',c:'w'},{t:'n',c:'w'},{t:'r',c:'w'}]];castling={wK:true,wQ:true,bK:true,bQ:true};enPassant=null;history=[];turn='w';selected=null;legalMoves=[];lastMove=null;gameOver=false;timers={w:600,b:600}}
+function cloneBoard(b){return b.map(r=>r.map(p=>p?{...p}:null))}
+function findKing(b,color){for(let r=0;r<8;r++)for(let c=0;c<8;c++)if(b[r][c]&&b[r][c].t=='k'&&b[r][c].c==color)return[r,c];return null}
+function isAttacked(b,r,c,byColor){for(let R=0;R<8;R++)for(let C=0;C<8;C++){let p=b[R][C];if(!p||p.c!=byColor)continue;if(canPieceAttack(b,R,C,r,c))return true}return false}
+function canPieceAttack(b,fr,fc,tr,tc){let p=b[fr][fc];if(!p)return false;let dr=tr-fr,dc=tc-fc,adr=Math.abs(dr),adc=Math.abs(dc);if(p.t=='p'){let dir=p.c=='w'?-1:1;return dr==dir&&adc==1}if(p.t=='n')return(adr==1&&adc==2)||(adr==2&&adc==1);if(p.t=='b'||p.t=='r'||p.t=='q'){if(p.t=='b'&&adr!=adc)return false;if(p.t=='r'&&adr!=0&&adc!=0)return false;if(p.t=='q'&&!(adr==adc||adr==0||adc==0))return false;let stepR=Math.sign(dr),stepC=Math.sign(dc);let R=fr+stepR,C=fc+stepC;while(R!=tr||C!=tc){if(b[R][C])return false;R+=stepR;C+=stepC}return true}if(p.t=='k')return adr<=1&&adc<=1;return false}
+function getPseudoMoves(b,r,c){let p=b[r][c];if(!p)return[];let moves=[],color=p.c,dir=color=='w'?-1:1;if(p.t=='p'){let nr=r+dir;if(nr>=0&&nr<8&&!b[nr][c]){moves.push([nr,c]);if((color=='w'&&r==6||color=='b'&&r==1)&&!b[nr+dir][c])moves.push([nr+dir,c])}for(let dc of[-1,1]){let nc=c+dc;if(nc<0||nc>7)continue;let tr=r+dir;if(tr<0||tr>7)continue;if(b[tr][nc]&&b[tr][nc].c!=color)moves.push([tr,nc]);if(enPassant&&enPassant[0]==tr&&enPassant[1]==nc)moves.push([tr,nc,true])}}if(p.t=='n'){[[-2,-1],[-2,1],[-1,-2],[-1,2],[1,-2],[1,2],[2,-1],[2,1]].forEach(([dr,dc])=>{let nr=r+dr,nc=c+dc;if(nr>=0&&nr<8&&nc>=0&&nc<8&&(!b[nr][nc]||b[nr][nc].c!=color))moves.push([nr,nc])})}if(p.t=='b'||p.t=='r'||p.t=='q'){let dirs=[];if(p.t=='b'||p.t=='q')dirs.push(...[[-1,-1],[-1,1],[1,-1],[1,1]]);if(p.t=='r'||p.t=='q')dirs.push(...[[-1,0],[1,0],[0,-1],[0,1]]);dirs.forEach(([dr,dc])=>{let nr=r+dr,nc=c+dc;while(nr>=0&&nr<8&&nc>=0&&nc<8){if(!b[nr][nc])moves.push([nr,nc]);else{if(b[nr][nc].c!=color)moves.push([nr,nc]);break}nr+=dr;nc+=dc}})}if(p.t=='k'){for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){if(dr==0&&dc==0)continue;let nr=r+dr,nc=c+dc;if(nr>=0&&nr<8&&nc>=0&&nc<8&&(!b[nr][nc]||b[nr][nc].c!=color))moves.push([nr,nc])}if(color=='w'&&r==7&&c==4){if(castling.wK&&!b[7][5]&&!b[7][6]&&!isAttacked(b,7,4,'b')&&!isAttacked(b,7,5,'b')&&!isAttacked(b,7,6,'b'))moves.push([7,6,'castleK']);if(castling.wQ&&!b[7][1]&&!b[7][2]&&!b[7][3]&&!isAttacked(b,7,4,'b')&&!isAttacked(b,7,3,'b')&&!isAttacked(b,7,2,'b'))moves.push([7,2,'castleQ'])}if(color=='b'&&r==0&&c==4){if(castling.bK&&!b[0][5]&&!b[0][6]&&!isAttacked(b,0,4,'w')&&!isAttacked(b,0,5,'w')&&!isAttacked(b,0,6,'w'))moves.push([0,6,'castleK']);if(castling.bQ&&!b[0][1]&&!b[0][2]&&!b[0][3]&&!isAttacked(b,0,4,'w')&&!isAttacked(b,0,3,'w')&&!isAttacked(b,0,2,'w'))moves.push([0,2,'castleQ'])}}return moves}
+function getLegalMoves(){let all=[];for(let r=0;r<8;r++)for(let c=0;c<8;c++){let p=board[r][c];if(!p||p.c!=turn)continue;let pseudos=getPseudoMoves(board,r,c);pseudos.forEach(m=>{let tr=m[0],tc=m[1],extra=m[2];let nb=cloneBoard(board);if(m[2]===true)nb[r][tc]=null;nb[tr][tc]=nb[r][c];nb[r][c]=null;if(extra&&extra.startsWith('castle')){if(extra=='castleK'){nb[tr][tc-1]=nb[tr][7];nb[tr][7]=null}else{nb[tr][tc+1]=nb[tr][0];nb[tr][0]=null}}let kp=findKing(nb,turn);if(!kp)return;if(isAttacked(nb,kp[0],kp[1],turn=='w'?'b':'w'))return;all.push({from:[r,c],to:[tr,tc],isEnPassant:m[2]===true,castle:extra,promo:(p.t=='p'&&(tr==0||tr==7))})})}return all}
+function render(){const el=document.getElementById('board');el.innerHTML='';for(let r=0;r<8;r++)for(let c=0;c<8;c++){let rr=flipped?7-r:r,cc=flipped?7-c:c;let sq=document.createElement('div');sq.className='sq '+((rr+cc)%2==0?'light':'dark');if(selected&&selected[0]==rr&&selected[1]==cc)sq.classList.add('selected');if(lastMove&&(lastMove.from[0]==rr&&lastMove.from[1]==cc||lastMove.to[0]==rr&&lastMove.to[1]==cc))sq.classList.add('last-from');let lm=legalMoves.find(m=>m.to[0]==rr&&m.to[1]==cc);if(selected&&lm){sq.classList.add('legal');if(board[rr][cc]||lm.isEnPassant)sq.classList.add('capture')}let p=board[rr][cc];if(p){let pd=document.createElement('div');pd.className='piece '+p.c;pd.textContent=piecesUnicode[p.c][p.t];sq.appendChild(pd)}sq.addEventListener('click',()=>onSqClick(rr,cc));el.appendChild(sq)}let allLegal=getLegalMoves();let inCheck=(()=>{let k=findKing(board,turn);return k?isAttacked(board,k[0],k[1],turn=='w'?'b':'w'):false})();let statusEl=document.getElementById('status');if(gameOver)return;if(allLegal.length==0){if(inCheck){statusEl.textContent=(turn=='w'?'الأبيض':'الأسود')+' مات! كش مات!';alert((turn=='w'?'الأسود':'الأبيض')+' فاز - كش مات!')}else{statusEl.textContent='تعادل - Stalemate'}gameOver=true;return}if(inCheck)statusEl.textContent=(turn=='w'?'الأبيض':'الأسود')+' في حالة كش!';else statusEl.textContent='دور '+(turn=='w'?'الأبيض ♔':'الأسود ♚')}}
+function onSqClick(r,c){if(gameOver)return;let p=board[r][c];if(selected){let move=legalMoves.find(m=>m.to[0]==r&&m.to[1]==c);if(move){doMove(move);return}if(p&&p.c==turn){selected=[r,c];legalMoves=getLegalMoves().filter(m=>m.from[0]==r&&m.from[1]==c);render();return}selected=null;legalMoves=[];render();return}if(p&&p.c==turn){selected=[r,c];legalMoves=getLegalMoves().filter(m=>m.from[0]==r&&m.from[1]==c);render()}}
+function doMove(move){
+ let fromR=move.from[0],fromC=move.from[1],toR=move.to[0],toC=move.to[1];
+ let piece=board[fromR][fromC];
+ if(piece.t=='k'){if(piece.c=='w'){castling.wK=false;castling.wQ=false}else{castling.bK=false;castling.bQ=false}}
+ if(piece.t=='r'){if(fromR==7&&fromC==0)castling.wQ=false;if(fromR==7&&fromC==7)castling.wK=false;if(fromR==0&&fromC==0)castling.bQ=false;if(fromR==0&&fromC==7)castling.bK=false}
+ history.push({board:cloneBoard(board),turn:turn});
+ board[toR][toC]=board[fromR][fromC];board[fromR][fromC]=null;
+ if(move.isEnPassant)board[fromR][toC]=null;
+ if(move.castle){if(move.castle=='castleK'){board[toR][5]=board[toR][7];board[toR][7]=null}else{board[toR][3]=board[toR][0];board[toR][0]=null}}
+ if(move.promo){let t=prompt('ترقية: q=وزير r=رخ b=فيل n=حصان','q')||'q';board[toR][toC]={t:t,c:piece.c}}
+ if(piece.t=='p'&&Math.abs(toR-fromR)==2)enPassant=[(fromR+toR)/2,fromC];else enPassant=null;
+ let d=document.createElement('div');d.className='move';d.textContent=String.fromCharCode(97+toC)+(8-toR);document.getElementById('moves').appendChild(d);
+ lastMove={from:[fromR,fromC],to:[toR,toC]};turn=turn=='w'?'b':'w';selected=null;legalMoves=[];render()
+}
+function newGame(){initBoard();document.getElementById('moves').innerHTML='';render()}
+function undoMove(){if(history.length>0){let h=history.pop();board=h.board;turn=h.turn;render()}}
+function flipBoard(){flipped=!flipped;render()}
+initBoard();render();
+</script>
+</body>
+</html>
