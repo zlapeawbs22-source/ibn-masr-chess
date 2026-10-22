@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -23,13 +24,13 @@ a.btn{text-decoration:none;display:inline-block;background:#fff}
 <button class="btn" onclick="game.reset();board.start();update()">🔄 من الأول</button>
 <a href="index.html" class="btn">🏠 رجوع</a>
 </div>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"></script>
 <script>
 var game = new Chess();
 var board = Chessboard('board', {
+  pieceTheme: 'https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/img/chesspieces/wikipedia/{piece}.png',
   draggable: true,
   position: 'start',
   onDrop: function(s,t){
