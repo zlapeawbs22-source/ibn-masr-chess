@@ -1,6 +1,6 @@
 
-<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ابن مصر - قطع واضحة عالمية</title><style>
-*{box-sizing:border-box;margin:0;padding:0}body{background:#0f0e0d;color:#fff;font-family:Tahoma,Arial;overflow-x:hidden}
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ابن مصر - ألوان مظبوطة</title><style>
+*{box-sizing:border-box;margin:0;padding:0}body{background:#0f0e0d;color:#fff;font-family:Tahoma;overflow-x:hidden}
 .hd{background:#1a1816;border-bottom:2px solid #f7c948;padding:10px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;position:sticky;top:0;z-index:10}
 #b{width:92vw;max-width:360px;aspect-ratio:1/1;margin:12px auto;border:3px solid #f7c948;display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(8,1fr);background:#f0d9b5;border-radius:6px;overflow:hidden;box-shadow:0 0 16px rgba(0,0,0,.5)}
 .q{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer}.l{background:#f0d9b5}.d{background:#b58863}
@@ -8,19 +8,26 @@
 .q.leg::after{content:'';width:24%;height:24%;background:rgba(0,0,0,.35);border-radius:50%;position:absolute;z-index:1}.q.leg.cap::after{width:68%;height:68%;background:transparent;border:3px solid rgba(0,0,0,.5);border-radius:50%}
 .pc{width:72%;height:72%;max-width:38px;max-height:38px;z-index:2;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))}.pc img{width:100%;height:100%;display:block}
 .c{background:#1e1c1a;border-radius:10px;padding:10px;margin:8px;border:1px solid #333}
-.bt{padding:8px 14px;border:none;border-radius:7px;font-weight:700;cursor:pointer;margin:2px;font-size:13px;font-family:Tahoma}.g{background:#f7c948;color:#000}.k{background:#2c2a28;color:#fff;border:1px solid #444}.rd{background:#e74c3c;color:#fff}.gr{background:#27ae60;color:#fff}
+.bt{padding:8px 12px;border:none;border-radius:7px;font-weight:700;cursor:pointer;margin:2px;font-size:12px;font-family:Tahoma}.g{background:#f7c948;color:#000}.k{background:#2c2a28;color:#fff;border:1px solid #444}.rd{background:#e74c3c;color:#fff}.gr{background:#27ae60;color:#fff}
 .box{height:160px;overflow-y:auto;background:#0f0e0d;border-radius:6px;padding:6px;border:1px solid #333}
 .ms{padding:5px;margin:3px 0;border-radius:6px;font-size:12px}.me{background:#f7c948;color:#000}.ot{background:#2c2a28}.sy{color:#f7c948;text-align:center;border:1px dashed #f7c948;font-size:10px}
-.stk{width:50px;height:50px;background:#2c2a28;border-radius:7px;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;margin:3px;border:2px solid transparent}.stk.e{border-color:#f7c948;background:#3a3520}
-.ov{position:fixed;inset:0;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;z-index:99}
-.lg{background:#1e1c1a;padding:20px;border-radius:12px;width:90%;max-width:340px;border:2px solid #f7c948;text-align:center}.lg input{width:100%;padding:9px;margin:6px 0;border-radius:7px;border:1px solid #444;background:#0f0e0d;color:#fff;text-align:center}
+.stk{width:48px;height:48px;background:#2c2a28;border-radius:7px;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;margin:3px;border:2px solid transparent;font-size:16px}.stk.e{border-color:#f7c948;background:#3a3520}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;z-index:99;padding:10px}
+.lg{background:#1e1c1a;padding:20px;border-radius:12px;width:100%;max-width:340px;border:2px solid #f7c948;text-align:center}.lg input{width:100%;padding:9px;margin:6px 0;border-radius:7px;border:1px solid #444;background:#0f0e0d;color:#fff;text-align:center}
+.tag{padding:2px 7px;border-radius:10px;font-size:10px;font-weight:800;display:inline-block;margin-left:4px}.tw{background:#fff;color:#000}.tb{background:#000;color:#fff;border:1px solid #555}.ts{background:#555;color:#fff}
 </style></head><body>
-<div class="hd"><b style="color:#f7c948">♟️ ابن مصر للشطرنج</b><div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap"><span id="rb" style="background:#f7c948;color:#000;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:800">زائر</span><span id="nm" style="font-size:12px"></span><button class="bt k" onclick="showL()">دخول</button><button class="bt k" onclick="copyL()">دعوة 🔗</button><button id="ab" class="bt rd" style="display:none" onclick="toggleA()">أدمن 👑</button></div></div>
-<div style="display:flex;flex-wrap:wrap;justify-content:center"><div id="b"></div><div style="width:92vw;max-width:360px"><div class="c"><div id="st" style="background:#2c2a28;padding:7px;border-radius:6px;text-align:center;font-weight:700;font-size:12px">دور الأبيض</div><div style="margin-top:6px;display:flex;gap:4px"><button class="bt g" onclick="newG()">🔄 جديدة</button><button class="bt k" onclick="undo()">↩️ تراجع</button><button class="bt k" onclick="flip()">🔄 قلب</button></div></div><div class="c"><b style="color:#f7c948;font-size:12px">👥 اللاعبين <span id="oc" style="float:left;background:#333;padding:2px 8px;border-radius:10px">0</span></b><div id="pl" style="margin-top:6px"></div></div><div class="c"><b style="color:#f7c948;font-size:12px">🏆 ملصقات</b><div id="sk" style="margin-top:6px"></div></div><div class="c" id="cc" style="display:none"><b style="font-size:12px">💬 شات الغرفة</b><div id="cb" class="box"></div><div style="display:flex;gap:4px;margin-top:6px"><input id="ci" style="flex:1;padding:6px;border-radius:6px;border:1px solid #444;background:#0f0e0d;color:#fff" placeholder="اكتب..." onkeypress="if(event.key=='Enter')send()"><button class="bt g" onclick="send()">إرسال</button></div></div><div class="c" id="rc"><b style="font-size:12px">🔒 طلب فتح الشات</b><p style="font-size:11px;color:#aaa;margin:4px 0">الشات يفتح بعد موافقة الأدمن</p><button class="bt g" style="width:100%;margin-top:6px;padding:8px" onclick="req()">طلب فتح الشات 🙏</button><div id="rs" style="font-size:11px;color:#f7c948;margin-top:6px"></div></div><div id="ap" class="c" style="display:none;border:2px solid #e74c3c;background:#2a1a1a"><b style="color:#e74c3c">👑 لوحة الأدمن</b><div style="margin-top:8px"><b style="font-size:11px">📩 طلبات:</b><div id="rq" style="margin-top:6px"></div></div><div style="margin-top:8px"><b style="font-size:11px">🚫 الحظر:</b><div id="appl" style="margin-top:6px"></div></div><div style="margin-top:8px;display:flex;gap:4px"><button class="bt k" onclick="clearC()">مسح الشات</button><button class="bt k" onclick="resetA()">تصفير</button></div></div><div class="c"><div id="il" style="background:#0f0e0d;padding:6px;border-radius:6px;font-size:9px;word-break:break-all;color:#777"></div><button class="bt gr" style="width:100%;margin-top:6px;padding:8px" onclick="copyL()">📋 نسخ رابط الدعوة</button></div></div></div>
-<div id="ov" class="ov"><div class="lg"><h3 style="color:#f7c948;margin-bottom:8px">أهلا بيك في ابن مصر ♟️</h3><input id="ln" placeholder="اسمك.."><input id="lp" type="password" placeholder="باسورد الأدمن: 123"><div style="display:flex;gap:6px;margin-top:10px"><button class="bt g" style="flex:1;padding:10px" onclick="login()">لاعب</button><button class="bt rd" style="flex:1;padding:10px" onclick="loginA()">أدمن 👑</button></div><p style="font-size:10px;color:#666;margin-top:8px">الباسورد: <b style="color:#f7c948">123</b></p><button class="bt k" style="width:100%;margin-top:8px;padding:8px" onclick="guest()">دخول كـ زائر</button></div></div>
+<div class="hd"><b style="color:#f7c948">♟️ ابن مصر</b><div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap"><span id="rb" style="background:#f7c948;color:#000;padding:3px 9px;border-radius:12px;font-size:11px;font-weight:800">زائر</span><span id="nm" style="font-size:12px"></span><span id="myCol" style="font-size:11px;color:#f7c948"></span><button class="bt k" onclick="showL()">دخول</button><button class="bt k" onclick="copyL()">دعوة 🔗</button><button id="ab" class="bt rd" style="display:none" onclick="toggleA()">أدمن 👑</button></div></div>
+<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:6px"><div id="b"></div><div style="width:92vw;max-width:360px"><div class="c"><div id="st" style="background:#2c2a28;padding:8px;border-radius:6px;text-align:center;font-weight:700;font-size:12px">دور الأبيض</div><div style="margin-top:6px;display:flex;gap:4px"><button class="bt g" onclick="newG()">🔄 جديدة</button><button class="bt k" onclick="undo()">↩️ تراجع</button><button class="bt k" onclick="flip()">🔄 قلب</button><button class="bt rd" onclick="leaveColor()">🚪 خروج</button></div></div><div class="c"><b style="color:#f7c948;font-size:12px">👥 اللاعبين <span id="oc" style="float:left;background:#333;padding:2px 8px;border-radius:10px">0</span></b><div id="pl" style="margin-top:6px"></div><p style="font-size:10px;color:#888;margin-top:6px">أول واحد = أبيض ♔ - تاني واحد = أسود ♚ - الباقي متفرجين 👁️</p></div><div class="c"><b style="color:#f7c948;font-size:12px">🏆 ملصقات</b><div id="sk" style="margin-top:6px"></div></div><div class="c" id="cc" style="display:none"><b style="font-size:12px">💬 شات</b><div id="cb" class="box"></div><div style="display:flex;gap:4px;margin-top:6px"><input id="ci" style="flex:1;padding:7px;border-radius:6px;border:1px solid #444;background:#0f0e0d;color:#fff" placeholder="اكتب..." onkeypress="if(event.key=='Enter')send()"><button class="bt g" onclick="send()">إرسال</button></div></div><div class="c" id="rc"><b style="font-size:12px">🔒 طلب فتح الشات</b><button class="bt g" style="width:100%;margin-top:6px" onclick="req()">طلب فتح 🙏</button><div id="rs" style="font-size:11px;color:#f7c948;margin-top:6px"></div></div><div id="ap" class="c" style="display:none;border:2px solid #e74c3c;background:#2a1a1a"><b style="color:#e74c3c">👑 أدمن</b><div style="margin-top:8px"><b style="font-size:11px">📩 طلبات:</b><div id="rq"></div></div><div style="margin-top:8px"><b style="font-size:11px">🚫 حظر:</b><div id="appl"></div></div><div style="margin-top:8px;display:flex;gap:4px"><button class="bt k" onclick="clearC()">مسح الشات</button><button class="bt k" onclick="resetA()">تصفير الكل</button></div></div><div class="c"><div id="il" style="background:#0f0e0d;padding:6px;border-radius:6px;font-size:9px;word-break:break-all;color:#777"></div><button class="bt gr" style="width:100%;margin-top:6px" onclick="copyL()">📋 نسخ رابط الدعوة</button></div></div></div>
+<div id="ov" class="ov"><div class="lg"><h3 style="color:#f7c948;margin-bottom:8px">أهلا بيك ♟️</h3><input id="ln" placeholder="اسمك.."><input id="lp" type="password" placeholder="باسورد الأدمن: 123"><div style="display:flex;gap:6px;margin-top:10px"><button class="bt g" style="flex:1;padding:11px" onclick="login()">لاعب</button><button class="bt rd" style="flex:1;padding:11px" onclick="loginA()">أدمن 👑</button></div><p style="font-size:10px;color:#666;margin-top:10px">الباسورد: <b style="color:#f7c948">123</b></p><button class="bt k" style="width:100%;margin-top:8px;padding:9px" onclick="guest()">دخول كـ زائر</button></div></div>
 <script>
-let cu=localStorage.getItem('cu'),ro=localStorage.getItem('ro')||'guest',bn=JSON.parse(localStorage.getItem('bn')||'[]'),rqA=JSON.parse(localStorage.getItem('rqA')||'[]'),appr=JSON.parse(localStorage.getItem('appr')||'[]'),pls=JSON.parse(localStorage.getItem('pls')||'[]'),cms=JSON.parse(localStorage.getItem('cms')||'[]'),sd=JSON.parse(localStorage.getItem('sd_'+(cu||'g'))||'{"g":0,"w":0,"p":0,"m":0}');
+let cu=localStorage.getItem('cu'),ro=localStorage.getItem('ro')||'guest';
+let bn=JSON.parse(localStorage.getItem('bn')||'[]'),rqA=JSON.parse(localStorage.getItem('rqA')||'[]'),appr=JSON.parse(localStorage.getItem('appr')||'[]'),cms=JSON.parse(localStorage.getItem('cms')||'[]'),sd=JSON.parse(localStorage.getItem('sd_'+(cu||'g'))||'{"g":0,"w":0,"p":0,"m":0}');
+let pls=JSON.parse(localStorage.getItem('plsObj')||'[]');
 let board,turn='w',cast,enp,hist=[],flipd=false,sel=null,lm=[],last=null,over=false;
+
+function getMyColor(){let me=pls.find(p=>p.n==cu);return me?me.c:null}
+function getMyColorName(){let c=getMyColor();if(c=='w')return 'أبيض ♔';if(c=='b')return 'أسود ♚';if(c=='s')return 'متفرج 👁️';return ''}
+
 function svgPiece(t,c){let m={p:'P',r:'R',n:'N',b:'B',q:'Q',k:'K'};let col=c=='w'?'w':'b';return `<img src="https://raw.githubusercontent.com/lichess-org/lila/master/public/piece/cburnett/${col+m[t]}.svg" alt="">`;}
 function init(){board=[[{t:'r',c:'b'},{t:'n',c:'b'},{t:'b',c:'b'},{t:'q',c:'b'},{t:'k',c:'b'},{t:'b',c:'b'},{t:'n',c:'b'},{t:'r',c:'b'}],[{t:'p',c:'b'},{t:'p',c:'b'},{t:'p',c:'b'},{t:'p',c:'b'},{t:'p',c:'b'},{t:'p',c:'b'},{t:'p',c:'b'},{t:'p',c:'b'}],[null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null],[{t:'p',c:'w'},{t:'p',c:'w'},{t:'p',c:'w'},{t:'p',c:'w'},{t:'p',c:'w'},{t:'p',c:'w'},{t:'p',c:'w'},{t:'p',c:'w'}],[{t:'r',c:'w'},{t:'n',c:'w'},{t:'b',c:'w'},{t:'q',c:'w'},{t:'k',c:'w'},{t:'b',c:'w'},{t:'n',c:'w'},{t:'r',c:'w'}]];cast={wK:true,wQ:true,bK:true,bQ:true};enp=null;hist=[];turn='w';sel=null;lm=[];last=null;over=false;}
 function clone(b){let nb=[];for(let r=0;r<8;r++){nb[r]=[];for(let c=0;c<8;c++){let p=b[r][c];nb[r][c]=p?{t:p.t,c:p.c}:null}}return nb}
@@ -30,18 +37,71 @@ function att(b,r,c,by){for(let R=0;R<8;R++)for(let C=0;C<8;C++){let p=b[R][C];if
 function pseudo(b,r,c){let p=b[r][c];if(!p)return[];let m=[],co=p.c,dir=co=='w'?-1:1;if(p.t=='p'){let nr=r+dir;if(nr>=0&&nr<8&&!b[nr][c]){m.push([nr,c]);if((co=='w'&&r==6||co=='b'&&r==1)&&!b[nr+dir][c])m.push([nr+dir,c])}for(let dc of[-1,1]){let nc=c+dc,tr=r+dir;if(nc<0||nc>7||tr<0||tr>7)continue;if(b[tr][nc]&&b[tr][nc].c!=co)m.push([tr,nc]);if(enp&&enp[0]==tr&&enp[1]==nc)m.push([tr,nc,true])}}if(p.t=='n'){[[-2,-1],[-2,1],[-1,-2],[-1,2],[1,-2],[1,2],[2,-1],[2,1]].forEach(d=>{let nr=r+d[0],nc=c+d[1];if(nr>=0&&nr<8&&nc>=0&&nc<8&&(!b[nr][nc]||b[nr][nc].c!=co))m.push([nr,nc])})}if(p.t=='b'||p.t=='r'||p.t=='q'){let dirs=[];if(p.t=='b'||p.t=='q')dirs.push(...[[-1,-1],[-1,1],[1,-1],[1,1]]);if(p.t=='r'||p.t=='q')dirs.push(...[[-1,0],[1,0],[0,-1],[0,1]]);dirs.forEach(d=>{let nr=r+d[0],nc=c+d[1];while(nr>=0&&nr<8&&nc>=0&&nc<8){if(!b[nr][nc])m.push([nr,nc]);else{if(b[nr][nc].c!=co)m.push([nr,nc]);break}nr+=d[0];nc+=d[1]}})}if(p.t=='k'){for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){if(dr==0&&dc==0)continue;let nr=r+dr,nc=c+dc;if(nr>=0&&nr<8&&nc>=0&&nc<8&&(!b[nr][nc]||b[nr][nc].c!=co))m.push([nr,nc])}if(co=='w'&&r==7&&c==4){if(cast.wK&&!b[7][5]&&!b[7][6]&&!att(b,7,4,'b')&&!att(b,7,5,'b')&&!att(b,7,6,'b'))m.push([7,6,'K']);if(cast.wQ&&!b[7][1]&&!b[7][2]&&!b[7][3]&&!att(b,7,4,'b')&&!att(b,7,3,'b')&&!att(b,7,2,'b'))m.push([7,2,'Q'])}if(co=='b'&&r==0&&c==4){if(cast.bK&&!b[0][5]&&!b[0][6]&&!att(b,0,4,'w')&&!att(b,0,5,'w')&&!att(b,0,6,'w'))m.push([0,6,'K']);if(cast.bQ&&!b[0][1]&&!b[0][2]&&!b[0][3]&&!att(b,0,4,'w')&&!att(b,0,3,'w')&&!att(b,0,2,'w'))m.push([0,2,'Q'])}}return m}
 function legal(){let all=[];for(let r=0;r<8;r++)for(let c=0;c<8;c++){let p=board[r][c];if(!p||p.c!=turn)continue;let ps=pseudo(board,r,c);ps.forEach(mm=>{let tr=mm[0],tc=mm[1],ex=mm[2];let nb=clone(board);if(mm[2]===true)nb[r][tc]=null;nb[tr][tc]=nb[r][c];nb[r][c]=null;if(ex=='K'){nb[tr][5]=nb[tr][7];nb[tr][7]=null}if(ex=='Q'){nb[tr][3]=nb[tr][0];nb[tr][0]=null}let kp=findK(nb,turn);if(!kp)return;if(att(nb,kp[0],kp[1],turn=='w'?'b':'w'))return;all.push({from:[r,c],to:[tr,tc],ep:mm[2]===true,castle:ex,promo:(p.t=='p'&&(tr==0||tr==7))})})}return all}
 function rend(){let el=document.getElementById('b');el.innerHTML='';let order=[];for(let r=0;r<8;r++)for(let c=0;c<8;c++)order.push([flipd?7-r:r,flipd?7-c:c]);for(let idx=0;idx<64;idx++){let rr=order[idx][0],cc=order[idx][1];let sq=document.createElement('div');sq.className='q '+((rr+cc)%2==0?'l':'d');if(sel&&sel[0]==rr&&sel[1]==cc)sq.className+=' sel';if(last&&(last.from[0]==rr&&last.from[1]==cc||last.to[0]==rr&&last.to[1]==cc))sq.className+=' last';let l=null;for(let i=0;i<lm.length;i++)if(lm[i].to[0]==rr&&lm[i].to[1]==cc)l=lm[i];if(sel&&l){sq.className+=' leg';if(board[rr][cc]||l.ep)sq.className+=' cap'}let kk=findK(board,turn);if(kk&&kk[0]==rr&&kk[1]==cc&&board[rr][cc]&&board[rr][cc].t=='k'&&att(board,rr,cc,turn=='w'?'b':'w'))sq.className+=' chk';let p=board[rr][cc];if(p){let sp=document.createElement('div');sp.className='pc';sp.innerHTML=svgPiece(p.t,p.c);sq.appendChild(sp)}(function(R,C){sq.onclick=()=>clk(R,C)})(rr,cc);el.appendChild(sq)}let all=legal(),k=findK(board,turn),chk=k?att(board,k[0],k[1],turn=='w'?'b':'w'):false,st=document.getElementById('st');if(all.length==0){if(chk){st.textContent=(turn=='w'?'الأسود فاز! 🏆':'الأبيض فاز! 🏆');sd.w++;}else st.textContent='تعادل 🤝';over=true;saveS();renderS();return}st.textContent=chk?(turn=='w'?'الأبيض في كش!':'الأسود في كش!'):'دور '+(turn=='w'?'الأبيض ♔':'الأسود ♚');}
-function clk(r,c){if(over)return;if(ro=='guest'){alert('ادخل كـ لاعب');return}let p=board[r][c];if(sel){for(let m of lm)if(m.to[0]==r&&m.to[1]==c){doM(m);return}if(p&&p.c==turn){sel=[r,c];lm=legal().filter(x=>x.from[0]==r&&x.from[1]==c);rend();return}sel=null;lm=[];rend();return;}if(p&&p.c==turn){sel=[r,c];lm=legal().filter(x=>x.from[0]==r&&x.from[1]==c);rend()}}
+function clk(r,c){
+  if(over) return;
+  if(ro=='guest'){alert('ادخل كـ لاعب الأول');return}
+  let myC=getMyColor();
+  if(ro!='admin'){
+    if(!myC){alert('حصل مشكلة في اللون - اخرج وادخل تاني');return}
+    if(myC=='s'){alert('انت متفرج بس 👁️ - اللعبة فيها 2 لاعبين');return}
+    if(myC!=turn){alert('مش دورك! انت '+getMyColorName()+' - دور '+(turn=='w'?'الأبيض ♔':'الأسود ♚'));return}
+  }
+  let p=board[r][c];
+  if(sel){
+    for(let m of lm) if(m.to[0]==r&&m.to[1]==c){doM(m);return}
+    if(p && p.c==turn && (ro=='admin' || p.c==myC)){
+      sel=[r,c]; lm=legal().filter(x=>x.from[0]==r&&x.from[1]==c); rend(); return;
+    }
+    sel=null; lm=[]; rend(); return;
+  }
+  if(p && p.c==turn && (ro=='admin' || p.c==myC)){
+    sel=[r,c]; lm=legal().filter(x=>x.from[0]==r&&x.from[1]==c); rend();
+  }
+}
 function doM(m){let fr=m.from[0],fc=m.from[1],tr=m.to[0],tc=m.to[1],pc=board[fr][fc];if(pc.t=='k'){if(pc.c=='w'){cast.wK=false;cast.wQ=false}else{cast.bK=false;cast.bQ=false}}if(pc.t=='r'){if(fr==7&&fc==0)cast.wQ=false;if(fr==7&&fc==7)cast.wK=false;if(fr==0&&fc==0)cast.bQ=false;if(fr==0&&fc==7)cast.bK=false}hist.push({b:clone(board),t:turn});board[tr][tc]=board[fr][fc];board[fr][fc]=null;if(m.ep)board[fr][tc]=null;if(m.castle){if(m.castle=='K'){board[tr][5]=board[tr][7];board[tr][7]=null}else{board[tr][3]=board[tr][0];board[tr][0]=null}}if(m.promo){let pr=prompt('ترقية q=وزير r=رخ b=فيل n=حصان','q')||'q';board[tr][tc]={t:pr,c:pc.c}}if(pc.t=='p'&&Math.abs(tr-fr)==2)enp=[(fr+tr)/2,fc];else enp=null;last={from:[fr,fc],to:[tr,tc]};turn=turn=='w'?'b':'w';sel=null;lm=[];sd.p++;saveS();rend();renderS();}
 function newG(){init();rend();sd.g++;saveS();renderS();addS('لعبة جديدة 🎮')}
 function undo(){if(hist.length){let h=hist.pop();board=h.b;turn=h.t;rend()}}
 function flip(){flipd=!flipd;rend()}
+function leaveColor(){if(!confirm('تخرج من اللعبة وتسيب مكانك لحد تاني؟'))return;pls=pls.filter(p=>p.n!=cu);localStorage.setItem('plsObj',JSON.stringify(pls));location.reload()}
 function saveS(){localStorage.setItem('sd_'+(cu||'g'),JSON.stringify(sd))}
 function renderS(){let el=document.getElementById('sk');el.innerHTML='';[['🎮','أول'],['⚔️','محارب'],['👑','ملك'],['💬','اجتماعي'],['🤝','جدع'],['🔥','مولع'],['🏆','أستاذ'],['👑','أدمن']].forEach((s,i)=>{let earn=false;if(i==0&&sd.g>=1)earn=true;if(i==1&&sd.g>=5)earn=true;if(i==2&&sd.w>=3)earn=true;if(i==3&&(sd.m||0)>=10)earn=true;if(i==4&&pls.length>=3)earn=true;if(i==5&&sd.g>=10)earn=true;if(i==6&&sd.w>=10)earn=true;if(i==7&&ro=='admin')earn=true;let d=document.createElement('div');d.className='stk '+(earn?'e':'');d.innerHTML='<div>'+s[0]+'</div><div style=font-size:8px>'+s[1]+'</div>';el.appendChild(d)})}
 function showL(){document.getElementById('ov').style.display='flex'}function hideL(){document.getElementById('ov').style.display='none'}
 function guest(){cu='زائر_'+Math.floor(Math.random()*900);ro='guest';localStorage.setItem('cu',cu);localStorage.setItem('ro',ro);hideL();up()}
-function login(){let n=document.getElementById('ln').value.trim();if(!n){alert('اكتب اسمك');return}if(bn.includes(n)){alert('محظور');return}cu=n;ro='player';localStorage.setItem('cu',cu);localStorage.setItem('ro',ro);if(!pls.includes(n)){pls.push(n);localStorage.setItem('pls',JSON.stringify(pls))}hideL();up()}
-function loginA(){let n=document.getElementById('ln').value.trim()||'الأدمن',p=document.getElementById('lp').value.trim();if(p!='123'&&p!='admin123'&&p!='admin'&&p!='1'){alert('الباسورد غلط! جرب 123');return}cu=n;ro='admin';localStorage.setItem('cu',cu);localStorage.setItem('ro',ro);if(!pls.includes(n)){pls.push(n);localStorage.setItem('pls',JSON.stringify(pls))}hideL();up()}
-function up(){document.getElementById('nm').textContent=cu||'';let rb=document.getElementById('rb');if(ro=='admin'){rb.textContent='أدمن 👑';rb.style.background='#e74c3c';document.getElementById('ab').style.display='inline-block'}else if(ro=='player'){rb.textContent='لاعب';rb.style.background='#27ae60';document.getElementById('ab').style.display='none'}else{rb.textContent='زائر';rb.style.background='#666'}checkC();renderP();renderS();renderChat();renderRQ();document.getElementById('il').textContent=location.href}
+function login(){
+  let n=document.getElementById('ln').value.trim();if(!n){alert('اكتب اسمك');return}if(bn.includes(n)){alert('محظور');return}
+  cu=n;ro='player';localStorage.setItem('cu',cu);localStorage.setItem('ro',ro);
+  if(!pls.find(p=>p.n==n)){
+    if(pls.length==0) pls.push({n:n,c:'w'});
+    else if(pls.length==1) pls.push({n:n,c:'b'});
+    else pls.push({n:n,c:'s'});
+    localStorage.setItem('plsObj',JSON.stringify(pls));
+  }
+  hideL();up();
+}
+function loginA(){
+  let n=document.getElementById('ln').value.trim()||'الأدمن',p=document.getElementById('lp').value.trim();
+  if(p!='123'&&p!='admin123'&&p!='admin'&&p!='1'){alert('الباسورد غلط! جرب 123');return}
+  cu=n;ro='admin';localStorage.setItem('cu',cu);localStorage.setItem('ro',ro);
+  if(!pls.find(p=>p.n==n)){
+    if(pls.length==0) pls.push({n:n,c:'w'});
+    else if(pls.length==1) pls.push({n:n,c:'b'});
+    else pls.push({n:n,c:'s'});
+    localStorage.setItem('plsObj',JSON.stringify(pls));
+  }
+  hideL();up();
+}
+function up(){
+  document.getElementById('nm').textContent=cu||'';let rb=document.getElementById('rb'),mc=document.getElementById('myCol');
+  let myC=getMyColor();
+  if(ro=='admin'){rb.textContent='أدمن 👑';rb.style.background='#e74c3c';document.getElementById('ab').style.display='inline-block';mc.textContent=' (تقدر تحرك الكل)'}
+  else if(ro=='player'){
+    if(myC=='w'){rb.textContent='أبيض ♔';rb.style.background='#fff';rb.style.color='#000';mc.textContent=' انت الأبيض - حرك الأبيض بس'}
+    else if(myC=='b'){rb.textContent='أسود ♚';rb.style.background='#000';rb.style.color='#fff';rb.style.border='1px solid #555';mc.textContent=' انت الأسود - حرك الأسود بس';flipd=true}
+    else{rb.textContent='متفرج 👁️';rb.style.background='#555';mc.textContent=' انت متفرج'}
+    document.getElementById('ab').style.display='none'
+  }else{rb.textContent='زائر';rb.style.background='#666';mc.textContent=''}
+  checkC();renderP();renderS();renderChat();renderRQ();rend();document.getElementById('il').textContent=location.href
+}
 function copyL(){let l=location.href;document.getElementById('il').textContent=l;navigator.clipboard.writeText(l).then(()=>alert('تم النسخ!'))}
 function req(){if(ro=='guest'){alert('ادخل كـ لاعب');return}if(bn.includes(cu)){alert('محظور');return}if(appr.includes(cu)){alert('الشات مفتوح!');return}if(rqA.includes(cu)){document.getElementById('rs').textContent='طلبك اتبعت ⏳';return}rqA.push(cu);localStorage.setItem('rqA',JSON.stringify(rqA));document.getElementById('rs').textContent='تم الإرسال!';addS(cu+' طلب فتح الشات 🙏');renderRQ()}
 function apprC(n){if(!appr.includes(n)){appr.push(n);localStorage.setItem('appr',JSON.stringify(appr))}rqA=rqA.filter(x=>x!=n);localStorage.setItem('rqA',JSON.stringify(rqA));addS('الأدمن وافق على '+n+' ✅');renderRQ();renderChat()}
@@ -51,10 +111,23 @@ function send(){let inp=document.getElementById('ci'),t=inp.value.trim();if(!t)r
 function addS(tx){cms.push({n:'النظام',tx:tx,ro:'sy'});localStorage.setItem('cms',JSON.stringify(cms));renderChat()}
 function renderChat(){let box=document.getElementById('cb');box.innerHTML='';cms.slice(-50).forEach(m=>{let d=document.createElement('div');d.className='ms '+(m.ro=='sy'?'sy':(m.n==cu?'me':'ot'));d.innerHTML='<b>'+(m.ro=='admin'?'👑 ':'')+m.n+':</b> '+m.tx;box.appendChild(d)});box.scrollTop=box.scrollHeight}
 function clearC(){if(confirm('مسح الشات؟')){cms=[];localStorage.setItem('cms',JSON.stringify(cms));renderChat()}}
-function renderP(){let el=document.getElementById('pl'),ap=document.getElementById('appl'),oc=document.getElementById('oc');el.innerHTML='';if(ap)ap.innerHTML='';oc.textContent=pls.length;pls.forEach(n=>{let ban=bn.includes(n);let d=document.createElement('div');d.style.cssText='display:flex;justify-content:space-between;padding:6px 10px;background:#2c2a28;border-radius:7px;margin:5px 0;font-size:12px';d.innerHTML='<span>'+n+(ban?' 🚫':(appr.includes(n)?' ✅':''))+'</span>';if(ro=='admin'&&n!=cu){let b=document.createElement('button');b.className='bt '+(ban?'gr':'rd');b.style.fontSize='10px';b.textContent=ban?'فك':'حظر';b.onclick=()=>togB(n);d.appendChild(b)}el.appendChild(d);if(ap&&ro=='admin'){let d2=document.createElement('div');d2.style.cssText='display:flex;justify-content:space-between;padding:6px 10px;background:#2c1a1a;border-radius:7px;margin:5px 0;font-size:12px';d2.innerHTML='<span>'+n+'</span>';let b2=document.createElement('button');b2.className='bt '+(ban?'gr':'rd');b2.style.fontSize='10px';b2.textContent=ban?'فك':'حظر';b2.onclick=()=>togB(n);d2.appendChild(b2);ap.appendChild(d2)}})}
+function renderP(){
+  let el=document.getElementById('pl'),ap=document.getElementById('appl'),oc=document.getElementById('oc');
+  el.innerHTML='';if(ap)ap.innerHTML='';oc.textContent=pls.length;
+  pls.forEach(pl=>{
+    let ban=bn.includes(pl.n);
+    let colTxt=pl.c=='w'?'♔ أبيض':pl.c=='b'?'♚ أسود':'👁️ متفرج';
+    let colClass=pl.c=='w'?'tw':pl.c=='b'?'tb':'ts';
+    let d=document.createElement('div');d.style.cssText='display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:#2c2a28;border-radius:7px;margin:5px 0;font-size:12px';
+    d.innerHTML=`<span><b>${pl.n}</b> <span class="tag ${colClass}">${colTxt}</span> ${ban?'🚫':''} ${appr.includes(pl.n)?'✅':''}</span>`;
+    if(ro=='admin'&&pl.n!=cu){let b=document.createElement('button');b.className='bt '+(ban?'gr':'rd');b.style.fontSize='10px';b.textContent=ban?'فك':'حظر';b.onclick=()=>togB(pl.n);d.appendChild(b)}
+    el.appendChild(d);
+    if(ap&&ro=='admin'){let d2=document.createElement('div');d2.style.cssText='display:flex;justify-content:space-between;padding:6px 10px;background:#2c1a1a;border-radius:7px;margin:5px 0;font-size:12px';d2.innerHTML=`<span>${pl.n} - ${colTxt}</span>`;let b2=document.createElement('button');b2.className='bt '+(ban?'gr':'rd');b2.style.fontSize='10px';b2.textContent=ban?'فك':'حظر';b2.onclick=()=>togB(pl.n);d2.appendChild(b2);ap.appendChild(d2)}
+  })
+}
 function togB(n){if(bn.includes(n))bn=bn.filter(x=>x!=n);else{bn.push(n);appr=appr.filter(x=>x!=n);rqA=rqA.filter(x=>x!=n);localStorage.setItem('appr',JSON.stringify(appr));localStorage.setItem('rqA',JSON.stringify(rqA))}localStorage.setItem('bn',JSON.stringify(bn));renderP();checkC();addS((bn.includes(n)?'تم حظر ':'فك حظر ')+n)}
 function renderRQ(){let el=document.getElementById('rq');el.innerHTML='';if(rqA.length==0){el.innerHTML='<p style=font-size:11px;color:#888>لا يوجد طلبات</p>';return}rqA.forEach(n=>{let d=document.createElement('div');d.style.cssText='background:#2c1a1a;border:1px solid #e74c3c;border-radius:6px;padding:6px;margin:4px 0;display:flex;justify-content:space-between;align-items:center';d.innerHTML='<span>💬 '+n+'</span>';let b=document.createElement('div');let ok=document.createElement('button');ok.className='bt gr';ok.textContent='موافقة';ok.onclick=()=>apprC(n);let no=document.createElement('button');no.className='bt rd';no.textContent='رفض';no.onclick=()=>rejC(n);b.appendChild(ok);b.appendChild(no);d.appendChild(b);el.appendChild(d)})}
-function resetA(){if(confirm('تصفير؟')){localStorage.clear();location.reload()}}
+function resetA(){if(confirm('تصفير كل حاجة؟')){localStorage.clear();location.reload()}}
 function toggleA(){let p=document.getElementById('ap');p.style.display=p.style.display=='none'?'block':'none'}
 init();rend();renderS();document.getElementById('il').textContent=location.href;if(cu){hideL();up()}
 </script></body></html>
