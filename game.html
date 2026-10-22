@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>العب - ابن مصر للشطرنج</title>
+<link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+<style>
+body{margin:0;background:#0f172a;color:#fff;font-family:Tahoma;text-align:center}
+h1{color:#facc15}
+#board{max-width:400px;margin:20px auto}
+.btn{background:#facc15;color:#000;padding:10px 20px;border-radius:8px;border:none;font-weight:bold;cursor:pointer;margin:5px}
+a{color:#facc15}
+</style>
+</head>
+<body>
+<h1>♟️ العب شطرنج</h1>
+<div id="board"></div>
+<div>
+<button class="btn" onclick="game.undo();board.position(game.fen())">تراجع</button>
+<button class="btn" onclick="game.reset();board.position('start')">اعادة</button>
+<a href="index.html" class="btn" style="text-decoration:none;display:inline-block">رجوع</a>
+</div>
+<p id="status">دور الابيض</p>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+<script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+<script>
+var game=new Chess();
+function onDrop(s,t){var m=game.move({from:s,to:t,promotion:'q'});if(m===null)return'snapback';update();}
+function update(){var s='';if(game.in_checkmate())s='كش مات! '+(game.turn()=='w'?'الاسود فاز':'الابيض فاز');else if(game.in_draw())s='تعادل';else s='دور '+(game.turn()=='w'?'الابيض':'الاسود')+(game.in_check()?' - كش!':'');document.getElementById('status').innerText=s;}
+var board=Chessboard('board',{draggable:true,position:'start',onDrop:onDrop});
+</script>
+</body>
+</html>
