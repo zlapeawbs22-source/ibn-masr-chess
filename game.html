@@ -1,36 +1,51 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>العب - ابن مصر للشطرنج</title>
-<link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css">
 <style>
 body{margin:0;background:#0f172a;color:#fff;font-family:Tahoma;text-align:center}
-h1{color:#facc15}
-#board{max-width:400px;margin:20px auto}
-.btn{background:#facc15;color:#000;padding:10px 20px;border-radius:8px;border:none;font-weight:bold;cursor:pointer;margin:5px}
-a{color:#facc15}
+h1{color:#facc15;margin-top:20px}
+#board{width:90%;max-width:450px;margin:20px auto;border:4px solid #facc15;border-radius:8px}
+.btn{background:#facc15;color:#000;padding:12px 20px;border-radius:10px;border:none;font-weight:bold;cursor:pointer;margin:8px;font-size:16px}
+#status{font-size:20px;margin:15px;color:#facc15;font-weight:bold}
+a.btn{text-decoration:none;display:inline-block;background:#fff}
 </style>
 </head>
 <body>
-<h1>♟️ العب شطرنج</h1>
+<h1>♟️ ابن مصر للشطرنج</h1>
 <div id="board"></div>
+<p id="status">دور الأبيض - اسحب القطعة</p>
 <div>
-<button class="btn" onclick="game.undo();board.position(game.fen())">تراجع</button>
-<button class="btn" onclick="game.reset();board.position('start')">اعادة</button>
-<a href="index.html" class="btn" style="text-decoration:none;display:inline-block">رجوع</a>
+<button class="btn" onclick="game.undo();board.position(game.fen());update()">↩️ تراجع</button>
+<button class="btn" onclick="game.reset();board.start();update()">🔄 من الأول</button>
+<a href="index.html" class="btn">🏠 رجوع</a>
 </div>
-<p id="status">دور الابيض</p>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
-<script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"></script>
 <script>
-var game=new Chess();
-function onDrop(s,t){var m=game.move({from:s,to:t,promotion:'q'});if(m===null)return'snapback';update();}
-function update(){var s='';if(game.in_checkmate())s='كش مات! '+(game.turn()=='w'?'الاسود فاز':'الابيض فاز');else if(game.in_draw())s='تعادل';else s='دور '+(game.turn()=='w'?'الابيض':'الاسود')+(game.in_check()?' - كش!':'');document.getElementById('status').innerText=s;}
-var board=Chessboard('board',{draggable:true,position:'start',onDrop:onDrop});
+var game = new Chess();
+var board = Chessboard('board', {
+  draggable: true,
+  position: 'start',
+  onDrop: function(s,t){
+    var m = game.move({from:s,to:t,promotion:'q'});
+    if(m===null) return 'snapback';
+    update();
+  }
+});
+function update(){
+  var txt='';
+  if(game.in_checkmate()) txt='كش مات! 🏆 '+(game.turn()=='w'?'الأسود فاز':'الأبيض فاز');
+  else if(game.in_draw()) txt='تعادل 🤝';
+  else if(game.in_check()) txt='كش! - دور '+(game.turn()=='w'?'الأبيض':'الأسود');
+  else txt='دور '+(game.turn()=='w'?'الأبيض ⚪':'الأسود ⚫');
+  document.getElementById('status').innerText=txt;
+}
 </script>
 </body>
 </html>
