@@ -4,122 +4,122 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ابن مصر ♟️ كل القوانين + أونلاين</title>
+<title>ابن مصر ♟️ احترافي</title>
 <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
 <style>
-body{background:#0f0f0f;color:#fff;margin:0;text-align:center;font-family:Arial}
-h1{margin:6px;font-size:17px}
-#status{background:#222;max-width:420px;margin:6px auto;padding:9px;border-radius:10px;font-weight:bold;font-size:12px;line-height:1.4}
-#board{width:92vw;max-width:400px;height:92vw;max-height:400px;margin:8px auto;display:grid;grid-template-columns:repeat(8,1fr);border:3px solid #fff;border-radius:8px;overflow:hidden;background:#fff}
-.sq{display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;position:relative;user-select:none}
-.white{background:#f0d9b5} .black{background:#b58863}
-.sel{outline:3px solid #ff0000;outline-offset:-3px}
-.legal::after{content:"";width:13px;height:13px;background:rgba(0,200,0,.8);border-radius:50%;position:absolute}
-.check{background:#ff3333 !important}
-button{background:#e50914;color:#fff;border:none;padding:9px 16px;border-radius:20px;margin:3px;cursor:pointer;font-weight:bold;font-size:12px}
-#onlineBox{background:#1a1a1a;border:1px solid #333;max-width:420px;margin:6px auto;padding:8px;border-radius:10px}
-input{padding:7px;border-radius:8px;border:none;width:75%;margin:4px;font-size:12px}
-small{color:#aaa;font-size:10px}
-#shareLink{margin-top:6px;word-break:break-all;font-size:11px}
+body{background:#302e2b;color:#fff;margin:0;text-align:center;font-family:system-ui}
+h1{margin:8px 0 2px;font-size:18px}
+#status{background:#262421;max-width:420px;margin:6px auto;padding:10px;border-radius:8px;font-weight:bold;font-size:13px;border:1px solid #3c3a38}
+#boardWrap{width:92vw;max-width:420px;margin:10px auto;aspect-ratio:1/1;background:#000;border-radius:6px;overflow:hidden;box-shadow:0 4px 20px #000;position:relative}
+#board{width:100%;height:100%;display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(8,1fr)}
+.sq{position:relative;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.sq.light{background:#ebecd0}
+.sq.dark{background:#739552}
+.sq.sel{outline:3px solid #f6f669;outline-offset:-3px;z-index:2}
+.sq.lastMove{background:#cdd26b !important}
+.sq.check{background:#ff6b6b !important}
+.sq.legal::after{content:"";width:26%;height:26%;background:rgba(0,0,0,0.2);border-radius:50%;position:absolute}
+.sq.legalCapture::before{content:"";position:absolute;width:85%;height:85%;border:5px solid rgba(0,0,0,0.2);border-radius:50%;box-sizing:border-box}
+.piece{width:85%;height:85%;pointer-events:none;filter:drop-shadow(0 1px 1px rgba(0,0,0,0.5))}
+.piece.whiteP{filter:drop-shadow(0 1px 2px rgba(0,0,0,0.8)) drop-shadow(0 0 1px #fff)}
+button{background:#81b64c;color:#fff;border:none;padding:10px 18px;border-radius:6px;margin:4px;cursor:pointer;font-weight:bold;font-size:13px;border-bottom:3px solid #5d8b3a}
+button:active{transform:translateY(2px);border-bottom-width:1px}
+#onlineBox{background:#262421;max-width:420px;margin:8px auto;padding:10px;border-radius:8px;border:1px solid #3c3a38}
+input{padding:8px;border-radius:6px;border:1px solid #444;width:72%;background:#3c3a38;color:#fff;margin:4px}
+#shareLink{font-size:11px;word-break:break-all;margin-top:6px;color:#a8e66c}
+.coords{position:absolute;font-size:9px;font-weight:bold;pointer-events:none}
+.coords.file{bottom:1px;right:2px}
+.coords.rank{top:1px;left:2px}
+.sq.light .coords{color:#739552}
+.sq.dark .coords{color:#ebecd0}
 </style>
 </head>
 <body>
-<h1>♟️ ابن مصر - كل القوانين + أونلاين</h1>
-<div id="status">جاري التحميل... دوس على قطعة بيضاء للبدء</div>
-<div id="board"></div>
+<h1>♟️ ابن مصر - احترافي</h1>
+<div id="status">دور الأبيض - دوس على قطعة</div>
+<div id="boardWrap"><div id="board"></div></div>
 
 <div id="onlineBox">
 <div id="myId" style="font-size:10px;color:#888">تجهيز الأونلاين...</div>
-<button onclick="createOnline()">🌍 العب أونلاين - ابعت لينك لصاحبك في أي بلد</button><br>
-<input id="joinInput" placeholder="أو حط كود صاحبك هنا">
+<button onclick="createOnline()">🌍 العب أونلاين مع صاحبك</button><br>
+<input id="joinInput" placeholder="كود صاحبك">
 <button onclick="joinOnline()">انضم</button>
 <div id="shareLink"></div>
 </div>
 
-<div style="margin:6px">
-<button onclick="newGame()">لعبة جديدة</button>
-<button onclick="undo()">تراجع</button>
+<div>
+<button onclick="newGame()">🔄 جديدة</button>
+<button onclick="undo()">↩️ تراجع</button>
+<button onclick="flipBoard()">🔃 اقلب الرقعة</button>
 </div>
-<div style="font-size:10px;color:#666;max-width:420px;margin:0 auto">قوانين: كش/كش مات - تبييت - أكل بالمرور - ترقية - منع كشف الملك</div>
 
 <script>
-const pieces={"r":"♜","n":"♞","b":"♝","q":"♛","k":"♚","p":"♟","R":"♖","N":"♘","B":"♗","Q":"♕","K":"♔","P":"♙"};
-let board, selected=null, turn="white", legalMoves=[], hist=[], castling, enPassant, peer, conn, myColor="white", isOnline=false, gameOver=false;
+const pieceImg={
+  "K":"https://images.chesscomfiles.com/chess-themes/pieces/neo/150/wk.png",
+  "Q":"https://images.chesscomfiles.com/chess-themes/pieces/neo/150/wq.png",
+  "R":"https://images.chesscomfiles.com/chess-themes/pieces/neo/150/wr.png",
+  "B":"https://images.chesscomfiles.com/chess-themes/pieces/neo/150/wb.png",
+  "N":"https://images.chesscomfiles.com/chess-themes/pieces/neo/150/wn.png",
+  "P":"https://images.chesscomfiles.com/chess-themes/pieces/neo/150/wp.png",
+  "k":"https://images.chesscomfiles.com/chess-themes/pieces/neo/150/bk.png",
+  "q":"https://images.chesscomfiles.com/chess-themes/pieces/neo/150/bq.png",
+  "r":"https://images.chesscomfiles.com/chess-themes/pieces/neo/150/br.png",
+  "b":"https://images.chesscomfiles.com/chess-themes/pieces/neo/150/bb.png",
+  "n":"https://images.chesscomfiles.com/chess-themes/pieces/neo/150/bn.png",
+  "p":"https://images.chesscomfiles.com/chess-themes/pieces/neo/150/bp.png"
+};
+
+let board, selected=null, lastMove=null, turn="white", legalMoves=[], hist=[], castling, enPassant, peer, conn, myColor="white", isOnline=false, gameOver=false, flipped=false;
 
 function init(){
   board=[["r","n","b","q","k","b","n","r"],["p","p","p","p","p","p","p","p"],["","","","","","","",""],["","","","","","","",""],["","","","","","","",""],["","","","","","","",""],["P","P","P","P","P","P","P","P"],["R","N","B","Q","K","B","N","R"]];
-  turn="white"; castling={K:true,Q:true,k:true,q:true}; enPassant=null; hist=[]; selected=null; legalMoves=[]; gameOver=false;
+  turn="white"; castling={K:true,Q:true,k:true,q:true}; enPassant=null; hist=[]; selected=null; legalMoves=[]; lastMove=null; gameOver=false;
 }
 function isWhite(p){return p&&p==p.toUpperCase()}
 function inB(r,c){return r>=0&&r<8&&c>=0&&c<8}
-
 function pseudoMoves(r,c,bd=board){
   let p=bd[r][c]; if(!p) return []; let m=[], w=isWhite(p), lo=p.toLowerCase();
-  if(lo=="p"){
-    let dir=w?-1:1, sr=w?6:1;
-    if(inB(r+dir,c)&&!bd[r+dir][c]){ m.push([r+dir,c]); if(r==sr&&!bd[r+dir*2][c]) m.push([r+dir*2,c]); }
-    for(let dc of[-1,1]){ let nr=r+dir,nc=c+dc; if(inB(nr,nc)&&bd[nr][nc]&&isWhite(bd[nr][nc])!=w) m.push([nr,nc]); if(enPassant&&enPassant[0]==nr&&enPassant[1]==nc) m.push([nr,nc]); }
-  }
+  if(lo=="p"){ let dir=w?-1:1, sr=w?6:1; if(inB(r+dir,c)&&!bd[r+dir][c]){m.push([r+dir,c]); if(r==sr&&!bd[r+dir*2][c]) m.push([r+dir*2,c]);} for(let dc of[-1,1]){let nr=r+dir,nc=c+dc; if(inB(nr,nc)&&bd[nr][nc]&&isWhite(bd[nr][nc])!=w) m.push([nr,nc]); if(enPassant&&enPassant[0]==nr&&enPassant[1]==nc) m.push([nr,nc]);}}
   if(lo=="n"){ for(let [dr,dc] of[[-2,-1],[-2,1],[-1,-2],[-1,2],[1,-2],[1,2],[2,-1],[2,1]]){let nr=r+dr,nc=c+dc; if(inB(nr,nc)&&(!bd[nr][nc]||isWhite(bd[nr][nc])!=w)) m.push([nr,nc]);}}
   if(lo=="b"||lo=="q"){ for(let [dr,dc] of[[-1,-1],[-1,1],[1,-1],[1,1]]){for(let i=1;i<8;i++){let nr=r+dr*i,nc=c+dc*i; if(!inB(nr,nc))break; if(!bd[nr][nc])m.push([nr,nc]); else{if(isWhite(bd[nr][nc])!=w)m.push([nr,nc]); break;}}}}
   if(lo=="r"||lo=="q"){ for(let [dr,dc] of[[-1,0],[1,0],[0,-1],[0,1]]){for(let i=1;i<8;i++){let nr=r+dr*i,nc=c+dc*i; if(!inB(nr,nc))break; if(!bd[nr][nc])m.push([nr,nc]); else{if(isWhite(bd[nr][nc])!=w)m.push([nr,nc]); break;}}}}
   if(lo=="k"){ for(let dr=-1;dr<=1;dr++) for(let dc=-1;dc<=1;dc++){if(dr==0&&dc==0)continue; let nr=r+dr,nc=c+dc; if(inB(nr,nc)&&(!bd[nr][nc]||isWhite(bd[nr][nc])!=w)) m.push([nr,nc]);} if(w&&r==7&&c==4){if(castling.K&&!bd[7][5]&&!bd[7][6])m.push([7,6]); if(castling.Q&&!bd[7][1]&&!bd[7][2]&&!bd[7][3])m.push([7,2]);} if(!w&&r==0&&c==4){if(castling.k&&!bd[0][5]&&!bd[0][6])m.push([0,6]); if(castling.q&&!bd[0][1]&&!bd[0][2]&&!bd[0][3])m.push([0,2]);}}
   return m;
 }
-
-function kingPos(bd, white){ for(let r=0;r<8;r++) for(let c=0;c<8;c++){let p=bd[r][c]; if(p&&p.toLowerCase()=="k"&&isWhite(p)==white) return [r,c];} return null; }
-
-function isAttacked(bd, r,c, byWhite){
-  for(let rr=0;rr<8;rr++) for(let cc=0;cc<8;cc++){ let p=bd[rr][cc]; if(!p||isWhite(p)!=byWhite) continue; let ms=pseudoMoves(rr,cc,bd); if(ms.some(([mr,mc])=>mr==r&&mc==c)) return true; }
-  return false;
-}
-
-function isInCheck(bd, white){ let kp=kingPos(bd,white); if(!kp) return true; return isAttacked(bd,kp[0],kp[1],!white); }
-
-function legalMovesFor(r,c){
-  let p=board[r][c]; if(!p) return []; let w=isWhite(p); if(w!=(turn=="white")) return [];
-  let pseud=pseudoMoves(r,c,board);
-  return pseud.filter(([nr,nc])=>{
-    let b2=board.map(x=>[...x]); 
-    // محاكاة
-    if(p.toLowerCase()=="p"&&enPassant&&nr==enPassant[0]&&nc==enPassant[1]) b2[r][nc]="";
-    if(p.toLowerCase()=="k"&&Math.abs(nc-c)==2){ if(nc==6){b2[r][5]=b2[r][7]; b2[r][7]="";} if(nc==2){b2[r][3]=b2[r][0]; b2[r][0]="";}}
-    b2[nr][nc]=b2[r][c]; b2[r][c]="";
-    return !isInCheck(b2,w);
-  });
-}
-
-function hasAnyMove(white){
-  for(let r=0;r<8;r++) for(let c=0;c<8;c++){ let p=board[r][c]; if(!p||isWhite(p)!=white) continue; if(legalMovesFor(r,c).length>0) return true; }
-  return false;
-}
-
-function checkState(){
-  let w=turn=="white"; let inCheck=isInCheck(board,w);
-  let any=hasAnyMove(w);
-  if(!any){
-    if(inCheck){ document.getElementById('status').innerHTML=`♔ كش مات! <b>${w?"الأسود":"الأبيض"} كسب 🏆</b>`; gameOver=true; }
-    else { document.getElementById('status').innerHTML=`🤝 تعادل - خنق (Stalemate)`; gameOver=true; }
-    return;
-  }
-  if(inCheck) document.getElementById('status').innerHTML=`⚠️ كش ملك! دور ${w?"الأبيض":"الأسود"} ${isOnline?` - أنت ${myColor=="white"?"الأبيض":"الأسود"}`:""}`;
-  else document.getElementById('status').innerHTML=`دور ${w?"الأبيض ♔":"الأسود ♚"} ${isOnline?` - أنت ${myColor=="white"?"الأبيض":"الأسود"} - ${((w&&myColor=="white")||(!w&&myColor=="black"))?"دورك":"دور خصمك"}`:""}`;
-}
+function kingPos(bd,white){for(let r=0;r<8;r++)for(let c=0;c<8;c++){let p=bd[r][c]; if(p&&p.toLowerCase()=="k"&&isWhite(p)==white) return[r,c];} return null;}
+function isAttacked(bd,r,c,byWhite){for(let rr=0;rr<8;rr++)for(let cc=0;cc<8;cc++){let p=bd[rr][cc]; if(!p||isWhite(p)!=byWhite)continue; let ms=pseudoMoves(rr,cc,bd); if(ms.some(([mr,mc])=>mr==r&&mc==c)) return true;} return false;}
+function isInCheck(bd,white){let kp=kingPos(bd,white); if(!kp) return true; return isAttacked(bd,kp[0],kp[1],!white);}
+function legalMovesFor(r,c){let p=board[r][c]; if(!p) return []; let w=isWhite(p); if(w!=(turn=="white")) return []; let pseud=pseudoMoves(r,c,board); return pseud.filter(([nr,nc])=>{let b2=board.map(x=>[...x]); if(p.toLowerCase()=="p"&&enPassant&&nr==enPassant[0]&&nc==enPassant[1]) b2[r][nc]=""; if(p.toLowerCase()=="k"&&Math.abs(nc-c)==2){if(nc==6){b2[r][5]=b2[r][7]; b2[r][7]="";} if(nc==2){b2[r][3]=b2[r][0]; b2[r][0]="";}} b2[nr][nc]=b2[r][c]; b2[r][c]=""; return !isInCheck(b2,w);});}
+function hasAnyMove(white){for(let r=0;r<8;r++)for(let c=0;c<8;c++){let p=board[r][c]; if(!p||isWhite(p)!=white) continue; if(legalMovesFor(r,c).length>0) return true;} return false;}
 
 function draw(){
   const b=document.getElementById('board'); b.innerHTML="";
   let kp=kingPos(board,turn=="white"); let inChk=kp?isInCheck(board,turn=="white"):false;
-  let flip=isOnline&&myColor=="black";
+  let flipView=flipped||(isOnline&&myColor=="black");
   for(let r=0;r<8;r++) for(let c=0;c<8;c++){
-    let rr=flip?7-r:r, cc=flip?7-c:c;
-    let sq=document.createElement('div'); sq.className=`sq ${(rr+cc)%2==0?'white':'black'}`;
+    let rr=flipView?7-r:r, cc=flipView?7-c:c;
+    let sq=document.createElement('div'); 
+    sq.className=`sq ${(rr+cc)%2==0?'light':'dark'}`;
+    if(lastMove&&((lastMove[0]==rr&&lastMove[1]==cc)||(lastMove[2]==rr&&lastMove[3]==cc))) sq.classList.add('lastMove');
     if(inChk&&kp&&kp[0]==rr&&kp[1]==cc) sq.classList.add('check');
-    let p=board[rr][cc]; if(p) sq.textContent=pieces[p];
     if(selected&&selected.r==rr&&selected.c==cc) sq.classList.add('sel');
-    if(legalMoves.some(([lr,lc])=>lr==rr&&lc==cc)) sq.classList.add('legal');
-    sq.onclick=()=>click(rr,cc); b.appendChild(sq);
+    if(legalMoves.some(([lr,lc])=>lr==rr&&lc==cc)){
+      if(board[rr][cc]) sq.classList.add('legalCapture'); else sq.classList.add('legal');
+    }
+    // احداثيات
+    if(c==0){ let rank=document.createElement('div'); rank.className='coords rank'; rank.textContent=8-rr; sq.appendChild(rank); }
+    if(r==7){ let file=document.createElement('div'); file.className='coords file'; file.textContent=String.fromCharCode(97+cc); sq.appendChild(file); }
+
+    let p=board[rr][cc];
+    if(p){ let img=document.createElement('img'); img.src=pieceImg[p]; img.className='piece'; img.draggable=false; sq.appendChild(img); }
+    sq.onclick=()=>click(rr,cc);
+    b.appendChild(sq);
   }
-  if(!gameOver) checkState();
+  if(gameOver) return;
+  let w=turn=="white"; let any=hasAnyMove(w);
+  if(!any){ if(inChk){ document.getElementById('status').innerHTML=`♔ كش مات! ${w?"الأسود":"الأبيض"} كسب 🏆`; } else { document.getElementById('status').innerHTML=`🤝 تعادل`; } gameOver=true; return; }
+  if(inChk) document.getElementById('status').innerHTML=`⚠️ كش ملك! دور ${w?"الأبيض":"الأسود"} ${isOnline?` - أنت ${myColor=="white"?"الأبيض":"الأسود"}`:""}`;
+  else document.getElementById('status').innerHTML=`دور ${w?"الأبيض":"الأسود"} ${isOnline?` - أنت ${myColor=="white"?"الأبيض ♔":"الأسود ♚"} - ${((w&&myColor=="white")||(!w&&myColor=="black"))?"دورك":"دور خصمك"}`:""}`;
 }
 
 function click(r,c){
@@ -129,17 +129,17 @@ function click(r,c){
     let mv=legalMoves.find(([mr,mc])=>mr==r&&mc==c);
     if(mv){
       let p=board[selected.r][selected.c];
-      hist.push({board:board.map(x=>[...x]), turn, castling:{...castling}, enPassant});
+      hist.push({board:board.map(x=>[...x]), turn, castling:{...castling}, enPassant, lastMove});
       if(p.toLowerCase()=="p"&&enPassant&&r==enPassant[0]&&c==enPassant[1]) board[selected.r][c]="";
       if(p.toLowerCase()=="k"&&Math.abs(c-selected.c)==2){ if(c==6){board[r][5]=board[r][7]; board[r][7]="";} if(c==2){board[r][3]=board[r][0]; board[r][0]="";}}
       board[r][c]=p; board[selected.r][selected.c]="";
-      if(p.toLowerCase()=="p"&&(r==0||r==7)){ let pr=prompt("ترقية لـ q=وزير r=رخ b=فيل n=حصان","q")||"q"; if(!["q","r","b","n"].includes(pr)) pr="q"; board[r][c]=isWhite(p)?pr.toUpperCase():pr; }
+      if(p.toLowerCase()=="p"&&(r==0||r==7)){ let pr=prompt("ترقية: q=وزير r=رخ b=فيل n=حصان","q")||"q"; if(!["q","r","b","n"].includes(pr)) pr="q"; board[r][c]=isWhite(p)?pr.toUpperCase():pr; }
       if(p=="K"){castling.K=false; castling.Q=false;} if(p=="k"){castling.k=false; castling.q=false;}
       if(p=="R"&&selected.r==7&&selected.c==7) castling.K=false; if(p=="R"&&selected.r==7&&selected.c==0) castling.Q=false;
       if(p=="r"&&selected.r==0&&selected.c==7) castling.k=false; if(p=="r"&&selected.r==0&&selected.c==0) castling.q=false;
       if(p.toLowerCase()=="p"&&Math.abs(r-selected.r)==2) enPassant=[(r+selected.r)/2,c]; else enPassant=null;
-      turn=turn=="white"?"black":"white";
-      if(isOnline&&conn) conn.send({board,turn,castling,enPassant});
+      lastMove=[selected.r,selected.c,r,c]; turn=turn=="white"?"black":"white";
+      if(isOnline&&conn) conn.send({board,turn,castling,enPassant,lastMove});
     }
     selected=null; legalMoves=[]; draw();
   } else {
@@ -148,32 +148,17 @@ function click(r,c){
     selected={r,c}; legalMoves=legalMovesFor(r,c); draw();
   }
 }
-function newGame(){ init(); draw(); if(isOnline&&conn) conn.send({board,turn,castling,enPassant}); }
-function undo(){ if(hist.length){ let h=hist.pop(); board=h.board; turn=h.turn; castling=h.castling; enPassant=h.enPassant; gameOver=false; selected=null; legalMoves=[]; draw(); if(isOnline&&conn) conn.send({board,turn,castling,enPassant}); } }
+function newGame(){ init(); draw(); if(isOnline&&conn) conn.send({board,turn,castling,enPassant,lastMove}); }
+function undo(){ if(hist.length){ let h=hist.pop(); board=h.board; turn=h.turn; castling=h.castling; enPassant=h.enPassant; lastMove=h.lastMove; gameOver=false; selected=null; legalMoves=[]; draw(); if(isOnline&&conn) conn.send({board,turn,castling,enPassant,lastMove}); } }
+function flipBoard(){ flipped=!flipped; draw(); }
 
-// ONLINE - PeerJS
-peer=new Peer();
-peer.on('open', id=>{
-  document.getElementById('myId').innerHTML=`كودك: <b style="color:#e50914;user-select:all">${id}</b>`;
-  let hash=location.hash.replace("#",""); if(hash){ document.getElementById('joinInput').value=hash; setTimeout(joinOnline,500); }
-});
-peer.on('connection', c=>{ conn=c; isOnline=true; myColor="white"; setupConn(); document.getElementById('shareLink').innerHTML="✅ صاحبك انضم! أنت الأبيض ♔ - اللعبة بدأت"; });
-
-function setupConn(){
-  conn.on('open', ()=>{ draw(); });
-  conn.on('data', d=>{ board=d.board; turn=d.turn; castling=d.castling; enPassant=d.enPassant; gameOver=false; draw(); });
-}
-window.createOnline=function(){
-  let id=peer.id; let link=`https://zlapeawbs22-source.github.io/ibn-masr-chess/#${id}`;
-  document.getElementById('shareLink').innerHTML=`ابعت ده لصاحبك في أي بلد:<br><b style="user-select:all;color:#0f0">${link}</b><br><small>اتنسخ - ابعته واتساب</small>`;
-  isOnline=true; myColor="white"; try{navigator.clipboard.writeText(link);}catch(e){}
-}
-window.joinOnline=function(){
-  let rid=document.getElementById('joinInput').value.trim()||location.hash.replace("#",""); if(!rid) return alert("حط كود الغرفة");
-  conn=peer.connect(rid); myColor="black"; isOnline=true;
-  conn.on('open', ()=>{ document.getElementById('shareLink').innerHTML="✅ انضميت! أنت الأسود ♚"; draw(); });
-  setupConn();
-}
+// ONLINE
+let peer=new Peer();
+peer.on('open', id=>{ document.getElementById('myId').innerHTML=`كودك: <b style="color:#81b64c;user-select:all">${id}</b>`; let hash=location.hash.replace("#",""); if(hash){ document.getElementById('joinInput').value=hash; setTimeout(joinOnline,600);} });
+peer.on('connection', c=>{ conn=c; isOnline=true; myColor="white"; setupConn(); document.getElementById('shareLink').innerHTML="✅ صاحبك انضم! أنت الأبيض ♔"; });
+function setupConn(){ conn.on('open', ()=>{draw();}); conn.on('data', d=>{ board=d.board; turn=d.turn; castling=d.castling; enPassant=d.enPassant; lastMove=d.lastMove; gameOver=false; draw(); }); }
+window.createOnline=function(){ let id=peer.id; let link=`https://zlapeawbs22-source.github.io/ibn-masr-chess/#${id}`; document.getElementById('shareLink').innerHTML=`ابعت ده لصاحبك:<br><b style="user-select:all;color:#a8e66c">${link}</b>`; isOnline=true; myColor="white"; try{navigator.clipboard.writeText(link);}catch(e){} }
+window.joinOnline=function(){ let rid=document.getElementById('joinInput').value.trim()||location.hash.replace("#",""); if(!rid) return alert("حط الكود"); conn=peer.connect(rid); myColor="black"; isOnline=true; conn.on('open', ()=>{ document.getElementById('shareLink').innerHTML="✅ انضميت! أنت الأسود ♚"; draw(); }); setupConn(); }
 
 init(); draw();
 </script>
